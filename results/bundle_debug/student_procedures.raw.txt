@@ -1,0 +1,58 @@
+[
+  {
+    "type": "Procedure",
+    "title": "Medical Exemption Submission",
+    "description": "How a student submits a request for a medical exemption from the attendance requirement.",
+    "tags": ["medical", "exemption", "submission", "form"],
+    "body": "A student must submit **Form MX-2** together with a certificate issued by a **registered medical practitioner** who holds an **MBBS degree or higher**."
+  },
+  {
+    "type": "Timeline",
+    "title": "Medical Exemption Submission Deadline",
+    "description": "The time limit within which a medical exemption request must be filed.",
+    "tags": ["medical", "exemption", "deadline", "working-days"],
+    "body": "The application must be submitted **within 10 working days of returning to classes**. Applications submitted after this period are **rejected without review**."
+  },
+  {
+    "type": "Procedure",
+    "title": "Medical Exemption Review and Approval",
+    "description": "The verification and decision‑making steps for a medical exemption request.",
+    "tags": ["medical", "exemption", "review", "approval"],
+    "body": "The Institute Medical Officer verifies the certificate and forwards a recommendation to the **Dean of Academics**. **Final approval** rests solely with the Dean of Academics. The Head of Department may comment on the application but **cannot approve** it."
+  },
+  {
+    "type": "Policy",
+    "title": "Attendance Impact of Approved Exemption",
+    "description": "How an approved medical exemption changes a student's attendance record.",
+    "tags": ["medical", "exemption", "attendance", "policy"],
+    "body": "An approved exemption raises the student's **effective attendance to exactly 75 percent** for the affected course. It does **not raise attendance beyond that threshold** and does **not apply retroactively to a previous semester**."
+  },
+  {
+    "type": "Procedure",
+    "title": "Change of Specialisation Application",
+    "description": "The process a final‑year student follows to change their declared specialisation.",
+    "tags": ["specialisation", "change", "application", "procedure"],
+    "body": "A final‑year student may apply **once** to change their declared specialisation. The application requires the **joint approval** of the **Head of Department** and the **Dean of Academics**. Either authority may reject the application independently."
+  },
+  {
+    "type": "Eligibility",
+    "title": "Specialisation Change Eligibility",
+    "description": "Academic conditions a student must meet to be eligible for a specialisation change.",
+    "tags": ["specialisation", "eligibility", "backlogs"],
+    "body": "The student must have **cleared all courses of the previous specialisation** and have **no pending backlogs**."
+  },
+  {
+    "type": "Procedure",
+    "title": "Grievance Appeal Process",
+    "description": "Steps a dissatisfied student can take to appeal an academic decision.",
+    "tags": ["grievance", "appeal", "procedure", "academic-decision"],
+    "body": "A student may appeal to the **Grievance Committee** within **21 days** of the decision being communicated."
+  },
+  {
+    "type": "Governance",
+    "title": "Grievance Committee Composition",
+    "description": "The makeup and restrictions of the Grievance Committee.",
+    "tags": ["grievance", "committee", "governance"],
+    "body": "The committee is **chaired by a faculty member nominated by the Director** and **cannot include the Dean of Academics**."
+  }
+]

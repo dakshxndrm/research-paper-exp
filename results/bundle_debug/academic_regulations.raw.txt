@@ -1,0 +1,65 @@
+[
+  {
+    "type": "Policy",
+    "title": "Minimum Attendance Requirement",
+    "description": "Students must achieve at least 75 percent attendance in each registered course to be eligible for the end‑semester examination.",
+    "tags": ["attendance", "examination", "eligibility"],
+    "body": "Every student must maintain a minimum of **75 percent attendance** in each registered course to be eligible to sit for the end‑semester examination."
+  },
+  {
+    "type": "Procedure",
+    "title": "Attendance Computation Method",
+    "description": "Attendance is calculated from the first instructional day to the last day of the semester and recorded separately for each course.",
+    "tags": ["attendance", "computation", "recording"],
+    "body": "Attendance is computed from the **first instructional day of the semester to the last** and is recorded **per course**, not as an aggregate across courses."
+  },
+  {
+    "type": "Consequence",
+    "title": "Consequence of Low Attendance",
+    "description": "Students whose attendance falls below 75 percent in any course are barred from the exam for that course and receive a DB grade.",
+    "tags": ["attendance", "debarment", "grade"],
+    "body": "A student falling below **75 percent** in any course is **debarred from the end‑semester examination** for that course and is awarded a grade of **DB**."
+  },
+  {
+    "type": "Procedure",
+    "title": "Medical Exemption for Attendance",
+    "description": "Students with attendance between 65 percent and 75 percent may apply for a medical exemption, which is evaluated through a formal process.",
+    "tags": ["attendance", "medical exemption", "process"],
+    "body": "Students who fall between **65 percent and 75 percent** may apply for a **medical exemption**. The exemption is **not automatic** and is subject to the **medical exemption process**."
+  },
+  {
+    "type": "Criterion",
+    "title": "Theory Course Passing Threshold",
+    "description": "A theory course is passed when a student obtains at least 40 percent of the total marks.",
+    "tags": ["examination", "theory", "passing criteria"],
+    "body": "For a **theory course**, a student must obtain at least **40 percent of the total marks** to be declared as having passed the course."
+  },
+  {
+    "type": "Criterion",
+    "title": "Laboratory Course Passing Requirements",
+    "description": "Laboratory courses require a minimum of 40 percent in both the practical component and overall marks; failure in the practical alone results in overall failure.",
+    "tags": ["examination", "laboratory", "passing criteria"],
+    "body": "For a **laboratory course**, a student must obtain at least **40 percent in the practical component** and at least **40 percent overall**. Failure in the practical component alone results in failure of the entire course, regardless of the overall total."
+  },
+  {
+    "type": "Timeline",
+    "title": "Course Registration Opening and Closing",
+    "description": "Registration opens two weeks before the semester starts and closes on the last working day before instruction begins.",
+    "tags": ["registration", "timeline", "semester"],
+    "body": "Course registration **opens two weeks before the semester begins** and **closes on the last working day before instruction starts**."
+  },
+  {
+    "type": "Fee",
+    "title": "Late Registration Fee Structure",
+    "description": "A late registration incurs a fee of 500 rupees per day, with a maximum cap of 5000 rupees.",
+    "tags": ["registration", "fee", "late"],
+    "body": "Registration submitted after the deadline attracts a **late fee of 500 rupees per day** of delay, **capped at a maximum of 5000 rupees**."
+  },
+  {
+    "type": "Definition",
+    "title": "Withdrawal Due to Non‑Registration",
+    "description": "A student who does not register within 15 days after the registration deadline is considered withdrawn from the semester.",
+    "tags": ["registration", "withdrawal", "deadline"],
+    "body": "A student who has not registered within **15 days of the deadline** is deemed to have **withdrawn from the semester**."
+  }
+]
