@@ -1,4 +1,4 @@
-```markdown
+
 # OKF-RAG
 
 ## Mitigating Hallucination in Retrieval-Augmented Generation using Curated Open Knowledge Format Bundles
