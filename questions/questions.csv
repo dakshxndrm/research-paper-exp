@@ -1,0 +1,7 @@
+qid,question,gold_answer,hop_type,gold_concepts,notes
+Q001,What is the minimum attendance percentage required to sit for end-semester examinations?,75 percent,single,policies/attendance_requirement.md,EXAMPLE ROW - delete and replace with your own
+Q002,A student with 68 percent attendance wants to appear for exams. What must they obtain and from whom?,A medical exemption certificate approved by the Dean of Academics,multi,policies/attendance_requirement.md;procedures/medical_exemption_process.md,EXAMPLE ROW - needs two linked concepts
+Q003,What is the late fee for registration submitted after the deadline?,500 rupees per day capped at 5000 rupees,single,policies/late_registration_fee.md,EXAMPLE ROW
+Q004,Who is responsible for approving a change of specialisation in the final year?,The Head of Department and the Dean of Academics jointly,multi,procedures/specialisation_change.md;entitys/dean_of_academics.md,EXAMPLE ROW
+Q005,What is the passing threshold for a laboratory course?,40 percent in the practical component and 40 percent overall,single,policies/lab_passing_criteria.md,EXAMPLE ROW
+Q006,What colour is the departmental mascot?,UNANSWERABLE,unanswerable,,EXAMPLE ROW - corpus is silent; correct behaviour is INSUFFICIENT CONTEXT

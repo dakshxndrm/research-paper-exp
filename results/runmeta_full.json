@@ -1,0 +1,67 @@
+{
+  "config": {
+    "experiment": {
+      "name": "okf_rag_v1",
+      "seed": 42
+    },
+    "paths": {
+      "raw_docs": "C:\\Users\\Daksh\\Desktop\\CODING\\research paper 4th year exp\\okf-rag-project\\okf-rag\\data\\raw",
+      "bundle": "C:\\Users\\Daksh\\Desktop\\CODING\\research paper 4th year exp\\okf-rag-project\\okf-rag\\data\\okf_bundle",
+      "questions": "C:\\Users\\Daksh\\Desktop\\CODING\\research paper 4th year exp\\okf-rag-project\\okf-rag\\questions\\questions.csv",
+      "results": "C:\\Users\\Daksh\\Desktop\\CODING\\research paper 4th year exp\\okf-rag-project\\okf-rag\\results"
+    },
+    "embedding": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "batch_size": 32
+    },
+    "retrieval": {
+      "context_token_budget": 1800,
+      "chunk": {
+        "chunk_size_tokens": 512,
+        "chunk_overlap_tokens": 64,
+        "top_k": 8
+      },
+      "okf": {
+        "top_k": 5,
+        "hop_expansion": 1,
+        "max_expanded": 4,
+        "use_freshness_filter": false,
+        "freshness_max_age_days": 3650,
+        "use_index_routing": true,
+        "embed_field": "title_description"
+      }
+    },
+    "generation": {
+      "provider": "openai_compatible",
+      "model": "openai/gpt-oss-120b",
+      "temperature": 0.0,
+      "max_tokens": 400,
+      "timeout_s": 180,
+      "api_key_env": "LLM_API_KEY",
+      "base_url": "https://api.groq.com/openai"
+    },
+    "judge": {
+      "enabled": true,
+      "provider": "openai_compatible",
+      "model": "openai/gpt-oss-20b",
+      "temperature": 0.0,
+      "api_key_env": "LLM_API_KEY",
+      "base_url": "https://api.groq.com/openai"
+    },
+    "bundle_builder": {
+      "provider": "openai_compatible",
+      "model": "openai/gpt-oss-120b",
+      "temperature": 0.0,
+      "api_key_env": "LLM_API_KEY",
+      "base_url": "https://api.groq.com/openai",
+      "max_concepts_per_doc": 12,
+      "min_concept_words": 15
+    }
+  },
+  "ablation": "full",
+  "n_questions": 5,
+  "arms": [
+    "chunk",
+    "okf"
+  ]
+}

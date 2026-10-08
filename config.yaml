@@ -1,0 +1,72 @@
+# ============================================================
+# OKF-RAG experiment configuration
+# Every knob that affects a reported number lives here.
+# Do not hardcode values in src/ -- change them here so the
+# config file can be published alongside the paper.
+# ============================================================
+
+experiment:
+  name: "okf_rag_v1"
+  seed: 42
+
+paths:
+  raw_docs: "data/raw"
+  bundle: "data/okf_bundle"
+  questions: "questions/questions.csv"
+  results: "results"
+
+embedding:
+  # Runs on CPU. ~80MB download on first use.
+  model: "sentence-transformers/all-MiniLM-L6-v2"
+  batch_size: 32
+
+retrieval:
+  # CRITICAL FOR VALIDITY: both arms get the SAME context budget.
+  # If one arm is allowed more context, any win is confounded.
+  context_token_budget: 1800
+
+  chunk:                     # Arm A -- baseline naive RAG
+    chunk_size_tokens: 512
+    chunk_overlap_tokens: 64
+    top_k: 8
+
+  okf:                       # Arm B -- proposed OKF-RAG
+    top_k: 5
+    hop_expansion: 1         # 0 disables link expansion (ablation)
+    max_expanded: 4          # cap on neighbours pulled in
+    use_freshness_filter: false
+    freshness_max_age_days: 3650
+    use_index_routing: true  # progressive disclosure via index.md
+    embed_field: "title_description"   # or "full_body"
+
+generation:
+  # provider: ollama | gemini | openai_compatible
+  # Groq is OpenAI-compatible; base_url omits the /v1 that llm.py appends.
+  provider: "openai_compatible"
+  model: "openai/gpt-oss-120b"
+  temperature: 0.0
+  max_tokens: 400
+  timeout_s: 180
+  # For gemini / openai_compatible only. Read from env var, never hardcode.
+  api_key_env: "LLM_API_KEY"
+  base_url: "https://api.groq.com/openai"
+
+judge:
+  # LLM-as-judge for faithfulness labels. Use a DIFFERENT model from the
+  # generator where possible, to reduce self-preference bias.
+  enabled: true
+  provider: "openai_compatible"
+  model: "openai/gpt-oss-20b"
+  temperature: 0.0
+  api_key_env: "LLM_API_KEY"
+  base_url: "https://api.groq.com/openai"
+
+bundle_builder:
+  # Concept extraction is LLM-assisted; cross-linking is deterministic.
+  provider: "openai_compatible"
+  model: "openai/gpt-oss-120b"
+  temperature: 0.0
+  api_key_env: "LLM_API_KEY"
+  base_url: "https://api.groq.com/openai"
+  max_concepts_per_doc: 12
+  min_concept_words: 15   # was 40 -- too strict, silently killed almost every concept
