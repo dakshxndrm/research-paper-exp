@@ -1,0 +1,45 @@
+!!! SUPERSEDED - INVALID: these results were generated against the V1 BUNDLE
+!!! (data/okf_bundle was a byte-identical copy of PUBLICATION_v1's bundle).
+!!! Superseded by a fresh-bundle rerun. Kept for reference only - do not cite.
+!!! See _SUPERSEDED_README.md in this directory.
+
+========================================================================
+LABEL DISTRIBUTION
+claude_label  abstained  contradicted  supported  unsupported
+arm                                                          
+chunk                 9             1         45            5
+okf                  13             1         36           10
+
+========================================================================
+PAIRED COMPARISON, 60 questions, claude_label (third independent judge)
+claude_hallucination   chunk=0.1000  okf=0.1833  delta=+0.0833  bootstrap p=0.1333
+                      McNemar: discordant 8/3, exact p = 0.2266
+hallucination          chunk=0.0667  okf=0.1167  delta=+0.0500  bootstrap p=0.2953
+                      McNemar: discordant 5/2, exact p = 0.4531
+f1                     chunk=0.3440  okf=0.3008  delta=-0.0432  bootstrap p=0.1295
+em                     chunk=0.0000  okf=0.0000  delta=+0.0000  bootstrap p=1
+                      McNemar: no discordant pairs (p = 1.0)
+retrieval_recall       chunk=nan  okf=nan  delta=+nan  bootstrap p=0
+
+========================================================================
+CLAUDE vs QWEN JUDGE agreement (all 120 rows)
+exact label agreement: 0.9000  (108/120)
+claude       abstained  contradicted  supported  unsupported
+qwen                                                        
+abstained           22             0          0            0
+supported            0             2         78            7
+unsupported          0             0          3            8
+
+binary hallucination agreement: 0.9000
+Cohen's kappa (binary hallucination): 0.5177
+
+========================================================================
+ABSTENTION BREAKDOWN
+unanswerable qids: 8
+  chunk: 9 abstentions = 8 on unanswerable + 1 on answerable ['Q007']
+  okf: 13 abstentions = 8 on unanswerable + 5 on answerable ['Q016', 'Q017', 'Q028', 'Q029', 'Q066']
+
+retrieval_recall (n=52 answerable) chunk=0.8558 okf=0.7981 delta=-0.0577 p=0.2762
+ANSWERABLE ONLY (n=52) claude_hallucination chunk=0.1154 okf=0.2115 delta=+0.0962 p=0.1585
+context_tokens chunk=1615.4 okf=1162.6 (-28.0%)
+generate_s chunk=8.93 okf=10.56

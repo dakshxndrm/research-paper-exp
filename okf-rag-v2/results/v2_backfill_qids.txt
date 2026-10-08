@@ -1,0 +1,16 @@
+# v2 multi-hop backfill — 7 qids added to the active set on 2026-08-28
+# Restores hop_type balance after the 7 audit exclusions. questions.csv NOT edited.
+#
+# --- genuinely two-document (4): neither cited doc alone answers the question ---
+Q057	scheduler binds the Pod (kube-scheduler.md) + kubelet monitors/restarts containers (self-healing.md). Neither doc has both.
+Q064	Deployment controller creates the replacement Pod (self-healing.md) + scheduler assigns it to a node (kube-scheduler.md). Neither doc has both.
+Q072	kubectl creates the Job via the apiserver (kubectl.md) + Job controller creates the Pods (controller.md). kubectl.md never mentions the Job controller.
+Q100	controllers create replacements + kubelet starts containers (self-healing.md) + scheduler assigns them (kube-scheduler.md). Three-part, spans both.
+#
+# --- single-doc answerable (3): kept for content coverage, NOT for hop difficulty ---
+# These are labelled 'multi' in questions.csv and cite two docs, but one cited doc
+# alone carries the full answer. Counted as multi in the distribution; do NOT cite
+# them as evidence that link expansion helped. Verified degenerate at:
+Q051	architecture.md:21 alone gives it ("the node does not need to run kube-proxy"). Kept: covers the networking/kube-proxy-optional path.
+Q069	kube-scheduler.md alone gives it ("If the list is empty, that Pod isn't (yet) schedulable"). Kept: only active question covering the scheduling FAILURE path.
+Q075	architecture__cloud-controller.md:57,92 alone gives it (Service controller sets up LBs when a Service requires one). Kept: covers cloud-controller content.

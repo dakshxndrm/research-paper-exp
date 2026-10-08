@@ -1,0 +1,10 @@
+[link_mode=alias] Paired on 60 questions (chunk vs okf, ablation=full).
+
+hallucination      chunk=0.0333  okf=0.0833  delta=+0.0500  bootstrap p=0.3056
+                   McNemar: discordant 5/2, exact p = 0.4531
+f1                 chunk=0.3151  okf=0.2869  delta=-0.0282  bootstrap p=0.3108
+em                 chunk=0.0000  okf=0.0167  delta=+0.0167  bootstrap p=0.5248
+                   McNemar: discordant 1/0, exact p = 1
+retrieval_recall   chunk=0.7417  okf=0.6917  delta=-0.0500  bootstrap p=0.1963
+
+Report the p-values as-is. With ~100 questions, a non-significant result is a legitimate finding -- say so rather than hiding it.

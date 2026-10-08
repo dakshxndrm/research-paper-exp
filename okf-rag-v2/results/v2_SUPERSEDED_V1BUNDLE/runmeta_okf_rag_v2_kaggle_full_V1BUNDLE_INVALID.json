@@ -1,0 +1,73 @@
+{
+  "config": {
+    "experiment": {
+      "name": "okf_rag_v2_kaggle",
+      "seed": 42
+    },
+    "paths": {
+      "raw_docs": "/kaggle/working/okf-rag/data/raw",
+      "bundle": "/kaggle/working/okf-rag/data/okf_bundle",
+      "questions": "/kaggle/working/okf-rag/questions/questions.csv",
+      "results": "/kaggle/working/okf-rag/results/v2_kaggle"
+    },
+    "embedding": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "batch_size": 32
+    },
+    "retrieval": {
+      "context_token_budget": 1800,
+      "chunk": {
+        "chunk_size_tokens": 512,
+        "chunk_overlap_tokens": 64,
+        "top_k": 8
+      },
+      "okf": {
+        "top_k": 5,
+        "hop_expansion": 1,
+        "max_expanded": 4,
+        "embed_field": "title_description"
+      }
+    },
+    "generation": {
+      "model": "huggingface.co/lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-GGUF:Q3_K_L",
+      "temperature": 0.0,
+      "max_tokens": 4000,
+      "timeout_s": 1800,
+      "api_key_env": null,
+      "base_url": "http://localhost:11434",
+      "retries": 5,
+      "seed": 42
+    },
+    "judge": {
+      "enabled": true,
+      "model": "qwen2.5:7b-instruct",
+      "temperature": 0.0,
+      "max_tokens": 1500,
+      "timeout_s": 1800,
+      "api_key_env": null,
+      "base_url": "http://localhost:11434",
+      "retries": 5,
+      "seed": 42
+    },
+    "bundle_builder": {
+      "model": "llama3.1:8b",
+      "temperature": 0.0,
+      "api_key_env": null,
+      "base_url": "http://localhost:11434",
+      "send_seed": true,
+      "retries": 8,
+      "timeout_s": 1800,
+      "max_retry_after_s": 120,
+      "max_concepts_per_doc": 12,
+      "min_concept_words": 15,
+      "max_tokens": 16000,
+      "link_mode": "alias",
+      "seed": 42
+    }
+  },
+  "ablation": "full",
+  "n_questions": 60,
+  "arms": [
+    "okf"
+  ]
+}

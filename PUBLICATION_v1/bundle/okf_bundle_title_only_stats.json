@@ -1,0 +1,16 @@
+{
+  "documents": 40,
+  "concepts": 371,
+  "link_mode": "title_only",
+  "cross_links": 387,
+  "links_from_alias": 0,
+  "links_from_title": 387,
+  "avg_links_per_concept": 1.04,
+  "avg_aliases_per_concept": 2.03,
+  "aliases_removed_quantity": 0,
+  "aliases_removed_ambiguous": 0,
+  "ambiguous_aliases_detected": 0,
+  "avg_body_words": 37.6,
+  "okf_top_k": 5,
+  "top_k_pct_of_bundle": 1.3
+}

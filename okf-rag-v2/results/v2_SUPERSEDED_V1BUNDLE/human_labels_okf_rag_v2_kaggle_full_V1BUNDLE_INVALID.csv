@@ -1,0 +1,145 @@
+arm,ablation,qid,question,gold_answer,answer,judge_label,human_label,human_notes
+chunk,full,Q071,"How does Kubernetes ensure secure communication from a node to the control plane, and which component terminates those API connections?","Nodes communicate over HTTPS using client credentials, and the kube-apiserver terminates the secure API connections.","Kubernetes secures node‑to‑control‑plane communication by using TLS with client certificates (or service‑account bearer tokens) and by routing all API calls through the API server, which terminates those HTTPS connections.  
+SOURCES: [architecture__control-plane-node-communication.md#chunk0]",supported,,
+chunk,full,Q077,"When a PodGroup uses gang scheduling, which scheduler feature ensures all-or-nothing placement and which resource defines the group?","The GangScheduling scheduler plugin enforces all-or-nothing placement, and the PodGroup resource defines the group.","The `GangScheduling` plugin (implemented through the `gang` scheduling policy) enforces the all‑or‑nothing placement, and the group is defined by the `PodGroup` resource, with its `minCount` field specifying the minimum number of pods that must be schedulable.  
+SOURCES: [workloads__workload-api__policies.md#chunk0], [scheduling-eviction__gang-scheduling.md#chunk0]",supported,,
+chunk,full,Q007,Which namespace is typically used for Kubernetes addons?,Cluster addons are typically deployed in the kube-system namespace.,INSUFFICIENT CONTEXT,abstained,,
+chunk,full,Q090,What is the default expiration period for ServiceAccount tokens?,UNANSWERABLE,INSUFFICIENT CONTEXT,abstained,,
+chunk,full,Q035,"Starting with Kubernetes 1.24, which component is no longer responsible for managing CNI plugins?",The kubelet is no longer responsible for managing CNI plugins.,"Starting with Kubernetes 1.24, the kubelet is no longer responsible for managing CNI plugins; that responsibility was removed from its command‑line parameters.  
+
+SOURCES: [extend-kubernetes__compute-storage-net__network-plugins.md#chunk0]",supported,,
+okf,full,Q007,Which namespace is typically used for Kubernetes addons?,Cluster addons are typically deployed in the kube-system namespace.,"Kubernetes addons are typically deployed in the `kube-system` namespace. This namespace hosts the cluster‑level components such as DNS, Dashboard, monitoring, and logging.  
+SOURCES: entity/addon.md,definition/kubernetes_addons_overview.md",supported,,
+okf,full,Q017,What command is recommended for declarative Kubernetes resource management?,kubectl apply is recommended for declarative resource management.,INSUFFICIENT CONTEXT,abstained,,
+chunk,full,Q013,What is the role of the Job controller?,The Job controller creates Pods to complete Jobs and updates the Job status when finished.,"The Job controller ensures that the desired state of a Job is approached by creating or removing Pods to perform the work and by updating the Job object (e.g., marking it `Finished`) to reflect progress toward completion.  
+SOURCES: architecture__controller.md#chunk0, architecture__controller.md#chunk1",supported,,
+chunk,full,Q065,"Which component provides DNS-based Service discovery, and which networking component enables traffic to reach the Service?","The DNS addon provides Service discovery, while kube-proxy or an equivalent network plugin enables Service traffic routing.","CoreDNS provides DNS‑based Service discovery, and the Gateway component of the Gateway API enables traffic to reach the Service.  
+SOURCES: [cluster-administration__addons.md#chunk2], [services-networking__gateway.md#chunk2], [services-networking__gateway.md#chunk0]",supported,,
+okf,full,Q077,"When a PodGroup uses gang scheduling, which scheduler feature ensures all-or-nothing placement and which resource defines the group?","The GangScheduling scheduler plugin enforces all-or-nothing placement, and the PodGroup resource defines the group.","Gang scheduling provides the all‑or‑nothing placement guarantee for a PodGroup, and the group itself is defined by a **PodGroup** resource.  
+
+SOURCES: [concept: /feature/gang_scheduling_overview.md], [concept: /definition/podgroup.md]",supported,,
+chunk,full,Q025,How often does the kubelet perform garbage collection for unused container images by default?,Every five minutes.,"The kubelet performs garbage collection on unused images every five minutes by default.  
+
+SOURCES: [architecture__garbage-collection.md#chunk2]",supported,,
+okf,full,Q005,Which component ensures that Pods are running on every node?,The kubelet ensures that Pods and their containers are running on each node.,"DaemonSet is the component that ensures Pods are running on every node.
+
+SOURCES: [/entity/daemonset.md]",unsupported,,
+chunk,full,Q014,What communication pattern does Kubernetes use between nodes and the control plane?,Kubernetes uses a hub-and-spoke API pattern where communication terminates at the API server.,"Kubernetes uses a hub‑and‑spoke communication pattern, where all API usage from nodes (and the pods they run) terminates at the API server.  
+SOURCES: [architecture__control-plane-node-communication.md#chunk0]",supported,,
+chunk,full,Q050,What scheduling phases does kube-scheduler perform before binding a Pod to a node?,Filtering followed by Scoring.,"The kube-scheduler first filters the set of nodes to find those that meet the Pod's scheduling requirements. It then scores the remaining feasible nodes and binds the Pod to the highest‑scoring node.  
+SOURCES: chunk0, chunk1",supported,,
+okf,full,Q039,Which IP family configurations are officially supported by Kubernetes clusters?,"IPv4-only, IPv6-only, and dual-stack (IPv4/IPv6 or IPv6/IPv4).","Kubernetes clusters are officially supported with three IP family configurations: IPv4‑only, IPv6‑only, and IPv4/IPv6 dual‑stack (both IPv4 and IPv6).  
+SOURCES: [concept: /classification/kubernetes_cluster_networking_types.md]",supported,,
+okf,full,Q041,Which Kubernetes controller is responsible for replacing failed Pods in a Deployment?,The Deployment controller (through ReplicaSets) creates replacement Pods to maintain the desired number of replicas.,"The Deployment controller is the component that watches Pods in a Deployment and creates replacement Pods when any of them fail, ensuring the desired replica count is maintained.
+
+SOURCES: /deployment/running_kubernetes_controllers.md",supported,,
+okf,full,Q079,"How does Kubernetes avoid partial placement of tightly coupled workloads, and which scheduling approach provides this capability?",The scheduler evaluates the PodGroup as a single unit and only binds Pods when the group's scheduling criteria are satisfied.,"Kubernetes avoids partial placement of tightly coupled workloads by using topology‑aware scheduling, which co‑locates all pods of a PodGroup into a single topology domain such as a rack or zone, ensuring they are placed together rather than split across nodes. This capability is provided by the Topology‑Aware Scheduling policy.  
+SOURCES: [concept: /policy/topology_aware_scheduling.md]",supported,,
+chunk,full,Q001,What are the two major parts of a Kubernetes cluster?,A Kubernetes cluster consists of a control plane and one or more worker nodes.,"The two major parts of a Kubernetes cluster are the control plane and the worker nodes.  
+SOURCES: [overview__components.md#chunk0]",supported,,
+okf,full,Q037,What are the four networking problems identified in Kubernetes cluster networking?,"Container-to-container, Pod-to-Pod, Pod-to-Service, and External-to-Service communication.","The four networking problems are:  
+1) Highly‑coupled container‑to‑container communications (solved by Pods and `localhost`),  
+2) Pod‑to‑Pod communications,  
+3) Pod‑to‑Service communications, and  
+4) External‑to‑Service communications.  
+
+SOURCES: [concept: /overview/kubernetes_networking_problems.md]",supported,,
+okf,full,Q071,"How does Kubernetes ensure secure communication from a node to the control plane, and which component terminates those API connections?","Nodes communicate over HTTPS using client credentials, and the kube-apiserver terminates the secure API connections.","Kubernetes secures node‑to‑control‑plane communication by using TLS on the API server and requiring client certificates or service‑account tokens for authentication and authorization. The API server component terminates those API connections.  
+SOURCES: [concept: /communication_pattern/node_to_control_plane_communication.md]",supported,,
+okf,full,Q008,What is the purpose of the Kubernetes Dashboard addon?,The Dashboard provides a web-based interface for managing and troubleshooting Kubernetes clusters.,"The Kubernetes Dashboard addon provides a web‑based user interface that lets users view, manage, and troubleshoot applications and the cluster itself.  
+
+SOURCES: [list/kubernetes_ui_add_ons.md], [definition/kubernetes_addons_overview.md]",supported,,
+chunk,full,Q073,"If a PersistentVolume is still attached to a running Pod when deletion is requested, what prevents immediate deletion and which relationship helps Kubernetes determine the dependent resources?","The pv-protection finalizer prevents deletion, while owner references identify dependent resources.","The deletion is blocked until the PersistentVolume is no longer referenced by its dependent objects; this is enforced by the **owner‑reference relationship**, which Kubernetes uses to identify and manage dependent resources before allowing deletion.  
+
+SOURCES: architecture__garbage-collection.md#chunk0",unsupported,,
+chunk,full,Q041,Which Kubernetes controller is responsible for replacing failed Pods in a Deployment?,The Deployment controller (through ReplicaSets) creates replacement Pods to maintain the desired number of replicas.,"The Deployment controller (through its underlying ReplicaSet) replaces failed Pods in a Deployment to keep the desired replica count.
+
+SOURCES: [architecture__controller.md#chunk2]",supported,,
+okf,full,Q013,What is the role of the Job controller?,The Job controller creates Pods to complete Jobs and updates the Job status when finished.,"The Job controller watches Job resources, creates Jobs, and reconciles their desired state—ensuring the specified number of completed Jobs are running and tracking their completion status. This behavior follows the general Kubernetes controller pattern and is specifically supported for cleaning up finished Jobs via the TTL‑after‑finished controller.  
+
+SOURCES: [concept: /pattern/kubernetes_controller_pattern.md], [concept: /policy/ttl_after_finished_controller_policy.md], [concept: /entity/job.md]",unsupported,,
+chunk,full,Q067,"When kubectl runs inside a Pod instead of on a user's workstation, what authentication method is used and which API component processes the request?","kubectl uses the mounted ServiceAccount token for in-cluster authentication, and the kube-apiserver processes the request.","It uses a service‑account JWT (token) authentication, and the request is processed by the API server’s authentication component.  
+SOURCES: [security__controlling-access.md#chunk0]",unsupported,,
+chunk,full,Q016,What is the default configuration file searched by kubectl?,kubectl looks for a config file in the $HOME/.kube directory.,"kubectl looks for a file named `config` in the `$HOME/.kube` directory by default.  
+SOURCES: [overview__kubectl.md#chunk0]",supported,,
+chunk,full,Q019,Which field allows Kubernetes to generate a resource name automatically?,The generateName field allows the server to generate a resource name.,"The field that enables Kubernetes to generate a resource name automatically is **`generateName`**. When this field is set, Kubernetes uses the provided value as a name prefix and appends a generated suffix to create a unique name.
+
+SOURCES: [overview__working-with-objects__names.md#chunk0]",supported,,
+okf,full,Q089,Which encryption algorithm is used by default for Secret objects stored in etcd?,UNANSWERABLE,INSUFFICIENT CONTEXT,abstained,,
+okf,full,Q020,What field stores owner information for dependent Kubernetes objects?,The metadata.ownerReferences field stores references to the owner object.,"The field that stores owner information for dependent Kubernetes objects is `metadata.ownerReferences` (shown as `metadata.[ownerReferences]` in the procedure documentation).
+
+SOURCES: [policy/owner_references_in_object_specifications.md]",supported,,
+okf,full,Q054,"Which component determines the desired state for a Job, and which controller creates the Pods required to satisfy it?","The Job object defines the desired state, and the Job controller creates the Pods needed to complete the Job.","The Job controller watches Job objects and defines the desired state for a Job, and it is the Job controller that creates the Pods needed to satisfy that state.  
+SOURCES: /component/kube_controller_manager.md",supported,,
+chunk,full,Q032,Which Pod specification field is used to select a RuntimeClass?,runtimeClassName.,"The Pod spec uses the `runtimeClassName` field to select a RuntimeClass.
+
+SOURCES: [containers__runtime-class.md#chunk1],[containers__runtime-class.md#chunk0]",supported,,
+okf,full,Q025,How often does the kubelet perform garbage collection for unused container images by default?,Every five minutes.,"By default, the kubelet performs garbage collection on unused container images every five minutes.  
+SOURCES: [concept: /procedure/kubelet_container_and_image_gc.md]",supported,,
+chunk,full,Q029,What HTTP status code does the API server return when a resource with finalizers is marked for deletion?,202 Accepted.,"The API server returns a `202` status code (HTTP ""Accepted"") when a resource with finalizers is marked for deletion.  
+SOURCES: [overview__working-with-objects__finalizers.md#chunk0]",supported,,
+okf,full,Q050,What scheduling phases does kube-scheduler perform before binding a Pod to a node?,Filtering followed by Scoring.,"The kube‑scheduler first runs a filtering step to narrow down the set of feasible nodes, then a scoring step to rank those nodes, and only after that binds the pod to a node.
+
+SOURCES: /procedure/kube_scheduler_selection_process.md, /procedure/filtering_step_in_kube_scheduler.md",unsupported,,
+chunk,full,Q091,Which cloud provider was the first officially supported by Kubernetes?,UNANSWERABLE,INSUFFICIENT CONTEXT,abstained,,
+okf,full,Q081,What is the maximum number of containers that a single Kubernetes Pod can contain?,UNANSWERABLE,"INSUFFICIENT CONTEXT
+SOURCES:",abstained,,
+chunk,full,Q040,Which Kubernetes feature automatically restarts failed containers according to the restartPolicy?,Kubernetes self-healing.,"Kubernetes automatically restarts failed containers by using the container‑level restart mechanism defined in the pod’s `restartPolicy`, which is enforced by the kubelet and the workload controllers (e.g., Deployment, ReplicaSet).  
+
+SOURCES: [architecture__self-healing.md#chunk0]",supported,,
+chunk,full,Q086,Which Linux kernel version is required to enable all Kubernetes networking features?,UNANSWERABLE,INSUFFICIENT CONTEXT,abstained,,
+okf,full,Q096,Which Kubernetes component exposes the Kubernetes HTTP API?,The kube-apiserver exposes the Kubernetes HTTP API.,"The API server component exposes the Kubernetes HTTP API.  
+
+SOURCES: [policy/api_server_behavior_in_kubernetes.md]",supported,,
+chunk,full,Q012,Which Kubernetes object represents the desired state for a controller?,The spec field of a Kubernetes resource represents its desired state.,"A controller’s desired state is defined by the Kubernetes resource it watches – the kind of object that expresses the state the controller should enforce, such as a Job, Deployment, or Node.  
+SOURCES: architecture__controller.md#chunk2",supported,,
+chunk,full,Q045,What is the primary purpose of cluster-level logging?,To collect and store container logs in a centralized location for searching and analysis.,"Cluster‑level logging saves container logs to a central log store and provides a searchable/browsable interface for accessing those logs.  
+
+SOURCES: [architecture.md#chunk2]",supported,,
+chunk,full,Q034,What is the primary purpose of a CNI plugin in Kubernetes?,A CNI plugin implements the Kubernetes networking model.,"The primary purpose of a CNI plugin in Kubernetes is to implement the cluster’s networking model by allocating IP addresses to pods and enabling them to communicate with each other.
+
+SOURCES: [architecture.md#chunk2], [extend-kubernetes__compute-storage-net__network-plugins.md#chunk0], [cluster-administration__networking.md#chunk1]",supported,,
+okf,full,Q012,Which Kubernetes object represents the desired state for a controller?,The spec field of a Kubernetes resource represents its desired state.,"The desired state for a controller is expressed in the **spec field of a Kubernetes resource (the object the controller tracks)**.  
+
+SOURCES: /pattern/kubernetes_controller_pattern.md, /philosophy/kubernetes_state_management.md",supported,,
+chunk,full,Q037,What are the four networking problems identified in Kubernetes cluster networking?,"Container-to-container, Pod-to-Pod, Pod-to-Service, and External-to-Service communication.","The four networking problems identified are: highly‑coupled container‑to‑container communications, pod‑to‑pod communications, pod‑to‑service communications, and external‑to‑service communications.  
+SOURCES: [cluster-administration__networking.md#chunk0]",supported,,
+okf,full,Q056,"Which component assigns IP addresses to Services, and which component forwards traffic to those Services?","The kube-apiserver assigns Service IP addresses, while kube-proxy (or an equivalent network plugin) forwards traffic.","The kube-apiserver assigns IP addresses to Services, and the service proxy implementation forwards traffic to those Services.  
+SOURCES: [concept: /concept/kubernetes_ip_address_allocation.md], [concept: /concept/service_proxy_implementation.md]",supported,,
+okf,full,Q034,What is the primary purpose of a CNI plugin in Kubernetes?,A CNI plugin implements the Kubernetes networking model.,"ANSWER: The primary purpose of a CNI plugin in Kubernetes is to allocate IP addresses to pods and enable them to communicate with each other within the cluster.
+
+SOURCES: /component/kubernetes_network_plugins.md",supported,,
+chunk,full,Q008,What is the purpose of the Kubernetes Dashboard addon?,The Dashboard provides a web-based interface for managing and troubleshooting Kubernetes clusters.,"The Kubernetes Dashboard addon provides a general‑purpose, web‑based UI that lets users manage and troubleshoot applications and the cluster itself, offering visualization and control capabilities within the cluster.  
+SOURCES: [architecture.md#chunk2],[cluster-administration__addons.md#chunk2]",supported,,
+okf,full,Q040,Which Kubernetes feature automatically restarts failed containers according to the restartPolicy?,Kubernetes self-healing.,"Kubernetes automatically restarts failed containers by creating a replacement Pod to maintain the desired replica count.  
+SOURCES: [concept: /capability/replica_replacement.md]",unsupported,,
+okf,full,Q011,What does the Service controller in cloud-controller-manager configure?,It configures cloud load balancers and related infrastructure for Services.,"The Service controller configures load balancers and other underlying cloud infrastructure components—such as IP addresses, network packet filtering, and target health checking—by interacting with the cloud provider’s APIs when a Service resource is declared.
+
+SOURCES: [concept: /procedure/service_controller_functions.md], [concept: /component/cloud_controller_manager.md], [concept: /entity/kubernetes_service.md]",supported,,
+chunk,full,Q063,"If a cloud-hosted node becomes unresponsive because the VM was deleted, which controller detects this and what action does it take?",The cloud-controller-manager's Node controller checks the cloud provider API and removes the corresponding Kubernetes Node object if the VM has been deleted.,"The Node controller detects that a cloud‑hosted node has become unresponsive (for example, its underlying VM was deleted) and it checks with the cloud provider to confirm that the node has been deleted.  
+
+SOURCES: [architecture.md#chunk1]",supported,,
+chunk,full,Q079,"How does Kubernetes avoid partial placement of tightly coupled workloads, and which scheduling approach provides this capability?",The scheduler evaluates the PodGroup as a single unit and only binds Pods when the group's scheduling criteria are satisfied.,"Kubernetes avoids partial placement by evaluating the entire PodGroup as a single unit and only binding the pods if a placement for the whole group can be found, which is implemented through the PodGroup scheduling cycle (gang scheduling).  
+
+SOURCES: [scheduling-eviction__podgroup-scheduling.md#chunk0], [workloads.md#chunk1]",supported,,
+chunk,full,Q048,Which Kubernetes resource field uniquely identifies an object across the entire cluster?,The UID field uniquely identifies an object across the cluster.,"The `uid` field uniquely identifies a Kubernetes object across the entire cluster.  
+SOURCES: [overview__working-with-objects__names.md#chunk0]",supported,,
+chunk,full,Q020,What field stores owner information for dependent Kubernetes objects?,The metadata.ownerReferences field stores references to the owner object.,"The field that stores owner information for dependent Kubernetes objects is `metadata.ownerReferences`.
+
+SOURCES: [overview__working-with-objects__owners-dependents.md#chunk0]",supported,,
+okf,full,Q009,What does the cloud-controller-manager manage?,It runs controllers that integrate Kubernetes with the underlying cloud provider.,"The cloud‑controller‑manager manages the cloud‑provider‑specific controllers that handle nodes, routes, and services—such as the Node controller (which checks node health), the Route controller (which configures routes), and the Service controller (which creates and manages load balancers). It runs as part of the control plane and interacts with the cloud provider’s APIs to keep the desired state of these resources.
+
+SOURCES: [concept: /component/cloud_controller_manager.md], [concept: /entity/cloud_controller_manager.md], [concept: /procedure/node_controller_functions.md], [concept: /procedure/route_controller_functions.md], [concept: /procedure/service_controller_functions.md]",supported,,
+chunk,full,Q046,Which component is considered the primary interface for managing Kubernetes resources from the command line?,kubectl is the primary command-line interface for managing Kubernetes resources.,"kubectl is the primary command‑line interface for creating, inspecting, updating, and deleting Kubernetes objects.  
+
+SOURCES: [overview__kubectl.md#chunk0]",supported,,
+okf,full,Q086,Which Linux kernel version is required to enable all Kubernetes networking features?,UNANSWERABLE,INSUFFICIENT CONTEXT,abstained,,
+chunk,full,Q010,Which controller in the cloud-controller-manager configures cloud routes?,The Route controller configures routes in the cloud infrastructure.,"The Route controller is responsible for configuring cloud routes in the cloud‑controller‑manager.
+
+SOURCES: architecture__cloud-controller.md#chunk1, architecture.md#chunk1",supported,,
+chunk,full,Q070,"Which Kubernetes mechanism assigns Service IP addresses, and which component exposes those Services on cluster nodes?","The kube-apiserver assigns Service IP addresses, while kube-proxy exposes and routes traffic to those Services.","The Service API assigns Service IP addresses, and a service proxy (implemented by kube‑proxy) exposes those Services on the cluster nodes.  
+SOURCES: [services-networking.md#chunk0]",supported,,
+okf,full,Q016,What is the default configuration file searched by kubectl?,kubectl looks for a config file in the $HOME/.kube directory.,"INSUFFICIENT CONTEXT
+SOURCES:",abstained,,
+okf,full,Q010,Which controller in the cloud-controller-manager configures cloud routes?,The Route controller configures routes in the cloud infrastructure.,"The route controller in the cloud‑controller‑manager is the component that configures cloud routes.  
+SOURCES: [concept: /component/cloud_controller_manager.md], [concept: /procedure/route_controller_functions.md]",supported,,

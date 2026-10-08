@@ -1,0 +1,17 @@
+# v2 excluded qids — questions dropped from v2's ACTIVE SET
+# Created 2026-08-28 from the questions.csv deep audit.
+#
+# questions/questions.csv is HUMAN-AUTHORED and is NOT edited. This file is the
+# only thing that governs which questions v2 uses. Format: <QID> <TAB> <reason>.
+# Lines starting with '#' and blank lines are comments.
+#
+# --- content defects (6) ---
+Q016	Answer answers a different question: asks for the default config FILE, gold gives the DIRECTORY ($HOME/.kube). Source doc says "a file named `config` in the $HOME/.kube directory". EM/F1 mismatch against any correct answer.
+Q049	Gold answer unsupported by its cited doc. "Labels ... resources that may not have unique names" is not in owners-dependents.md; that premise lives in names.md. Cited doc is wrong, or the answer is.
+Q058	Gold answer contradicts the corpus. Claims kube-scheduler "enforces" RuntimeClass scheduling constraints; runtime-class.md says nodeSelector/tolerations are merged "in admission". Second gold doc (kube-scheduler.md) never mentions RuntimeClass.
+Q066	Same defect as Q058 (near-duplicate of it): admission-vs-scheduler enforcement claim, plus a second gold doc that contributes nothing.
+Q076	Wrong second gold doc. Answer is entirely from network-plugins.md (loopback `lo` per Pod sandbox); co-cited containers__runtime-class.md contains no mention of loopback or sandbox networking. Not a genuine multi-hop.
+Q079	Two-part question, one-part gold answer. Asks "...and which scheduling approach provides this capability?" but the gold answer never names the approach, leaving half the question untested.
+#
+# --- duplicate (1) ---
+Q048	Exact equivalent of Q018 (same answer "UID", same gold doc, same hop_type). Q018 kept, Q048 dropped. Both were in the original labelled 60, so leaving both would double-count UID-question behaviour in the headline.

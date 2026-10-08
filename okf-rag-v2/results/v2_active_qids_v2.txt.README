@@ -1,0 +1,57 @@
+# v2_active_qids_v2.txt  --  FINAL (2026-09-02)
+#
+# Supersedes results/v2_active_qids.txt (the old 63, frozen 2026-08-28 BEFORE the
+# genuine multi-hop questions were written). The old file is kept for reference and
+# is NOT deleted. Nothing in the pipeline reads this new file yet -- point the
+# notebook's qid cell at it when generation is authorised.
+#
+# questions/questions.csv is the source of truth; this file is a pure selector
+# (bare qid list, one per line, LF, for `.read_text().split()`).
+#
+# ============================================================================
+# COMPOSITION -- 65 qids: 37 single / 18 multi / 10 unanswerable  (56.9 / 27.7 / 15.4 %)
+# ============================================================================
+#
+# MULTI-HOP (18) -- ONLY verified-genuine two-document questions (cover-one-up test:
+# the gold answer is impossible from either single cited doc alone). All others
+# labelled hop_type=multi in questions.csv are degenerate (single-doc answerable)
+# per the two audits and are EXCLUDED.
+#   from the original 100 : Q056 Q057 Q064 Q070 Q072 Q100
+#   round-1 additions      : Q102 Q104 Q109 Q111 Q115
+#   round-2 additions      : Q126 Q127 Q128 Q129 Q132 Q133 Q134
+#   (Q132 is the weakest -- only its "policy is copied into the PodGroup" clause
+#    keeps it off single-doc; drop it for a 64-qid / 17-multi set if desired.)
+#
+# UNANSWERABLE (10): the 8 from the old active set (Q081 Q082 Q084 Q086 Q089 Q090
+#   Q091 Q094) + Q083 Q085. No gold_concepts by design.
+#
+# SINGLE (37): the exact 37 single-hop qids from the old active set -- unchanged.
+#   None are among the 7 known-flawed qids.
+#
+# EXCLUDED, never in this set:
+#   - 7 known-flawed qids: Q016 Q048 Q049 Q058 Q066 Q076 Q079
+#   - 37 degenerate "multi" qids (hop_type=multi in csv but not verified-genuine):
+#     Q051 Q052 Q053 Q054 Q055 Q058 Q059 Q060 Q061 Q062 Q063 Q065 Q066 Q067 Q068
+#     Q069 Q071 Q073 Q074 Q075 Q076 Q077 Q078 Q079 Q080 Q098 Q099 Q101 Q103 Q105
+#     Q106 Q107 Q108 Q110 Q112 Q113 Q114
+#
+# ============================================================================
+# VALIDATION (against the new Nemotron-3.5-Lightning bundle, 358 concepts)
+# ============================================================================
+#   - all 65 qids exist in questions/questions.csv
+#   - no duplicate qids; no flawed qid present
+#   - every gold_concepts document for the 55 answerable qids resolves to >=1
+#     concept in the new bundle via resource: source://<doc> frontmatter
+#     (range 2-12 concepts/doc; thinnest: workloads__workload-api__disruption-and-priority.md
+#      -> 2 concepts, cited by Q111 and Q133)
+#   - the 10 unanswerable qids have empty gold_concepts BY DESIGN (scored on
+#     abstention, not retrieval_recall) -- not a resolution failure
+#
+# ============================================================================
+# HUMAN-LABEL BURDEN FOR v2
+# ============================================================================
+#   65 qids x 2 arms (chunk + okf) = 130 rows, ALL fresh.
+#   The v1 human labels do NOT carry over: v2 runs on a different bundle
+#   (358 concepts vs v1's 371) AND a different generator (Nemotron-3.5-Lightning
+#   vs v1's llama3.1:8b), so every generated answer differs. There is no
+#   label reuse for any row, regardless of qid overlap with the old set.

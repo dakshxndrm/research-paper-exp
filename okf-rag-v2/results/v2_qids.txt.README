@@ -1,0 +1,6 @@
+v2_qids.txt        = the ORIGINAL 60 human-labelled qids inherited from v1. Historical; do not feed to run_experiment.
+v2_excluded_qids.txt = 7 qids dropped from v2 by the 2026-08-28 questions audit, with reasons.
+(superseded line removed - see final entry below)
+questions/questions.csv is never edited; these lists are the only selection mechanism.
+v2_backfill_qids.txt = 7 multi-hop qids added back on 2026-08-28 to restore hop_type balance.
+v2_active_qids.txt   = v2_qids.txt - v2_excluded_qids.txt + v2_backfill_qids.txt = 63 qids. FINAL.

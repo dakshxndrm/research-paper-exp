@@ -1,0 +1,101 @@
+qid,labelled_hop_type,verified_hop_type,genuinely_two_doc,notes
+Q001,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q002,single,single,n/a,"CORRECT as single but AMBIGUOUS: asks 'which component' and gold answers 'the control plane', which is not a component. Conflicts with Q004/Q097 answering kube-scheduler."
+Q003,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q004,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q005,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q006,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q007,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q008,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q009,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q010,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q011,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q012,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q013,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q014,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q015,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q016,single,single,n/a,"CORRECT as single. Separate defect (already excluded): asks for the config FILE, gold gives the DIRECTORY."
+Q017,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q018,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q019,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q020,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q021,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q022,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q023,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q024,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q025,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q026,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q027,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q028,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q029,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q030,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q031,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q032,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q033,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q034,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q035,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q036,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q037,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q038,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q039,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q040,single,single,n/a,CORRECT as single. Separate defect: near-identical wording to Q042 ('feature' vs 'component') with mutually exclusive gold answers.
+Q041,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q042,single,single,n/a,CORRECT as single. Confusable partner of Q040.
+Q043,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q044,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q045,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q046,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q047,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q048,single,single,n/a,CORRECT as single. Exact duplicate of Q018 (already excluded).
+Q049,single,single,n/a,"MISLABELLED DOCUMENT, not hop_type. The gold answer's 'non-unique names' premise is in names.md; the cited owners-dependents.md does not contain it. Still single-hop -- it needs ONE doc, just not the cited one."
+Q050,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q051,multi,single,no,"architecture.md alone: 'some network plugins provide their own, third party implementation of proxying... the node does not need to run kube-proxy'. Full answer in one doc."
+Q052,multi,single,no,"kubectl.md alone: 'it sends requests to the API server' AND 'applies it to the cluster state stored in etcd'. Both halves, one doc."
+Q053,multi,single,no,"components.md alone: kube-scheduler 'assigns each Pod to a suitable node' + kubelet 'Ensures that Pods are running'. Both halves, one doc."
+Q054,multi,single,no,"controller.md alone: 'the desired state is for that Job to be completed' + the Job controller creating Pods. Both halves, one doc."
+Q055,multi,single,no,EITHER doc alone suffices: finalizers.md and owners-dependents.md both carry the full pv-protection PersistentVolume example.
+Q056,multi,multi,YES,networking.md has 'The kube-apiserver is configured to assign IP addresses to Services' but never mentions kube-proxy; architecture.md has kube-proxy but not Service IP assignment. Neither alone.
+Q057,multi,multi,YES,"kube-scheduler.md has binding but not restart-on-failure; self-healing.md has 'kubelet: Ensures that containers are running, and restarts those that fail' but not scheduling. Neither alone."
+Q058,multi,single,no,runtime-class.md alone carries the whole scheduling-constraints section; kube-scheduler.md never mentions RuntimeClass. Gold answer separately wrong: the merge happens in admission.
+Q059,multi,single,no,"EITHER doc alone: finalizers.md 'Owner references, labels, and finalizers' and owners-dependents.md 'Ownership and finalizers' each carry both mechanisms."
+Q060,multi,single,no,control-plane-node-communication.md alone: 'All API usage from nodes... terminates at the API server' + 'client credentials provided to the kubelet are in the form of a client certificate'.
+Q061,multi,single,no,"kube-scheduler.md line 41 alone: 'The scheduler then notifies the API server about this decision in a process called binding.' Both halves, one doc."
+Q062,multi,single,no,"kubectl.md alone, same as Q052. Also a near-duplicate of Q052."
+Q063,multi,single,no,cloud-controller.md alone: Node controller 'checks with your cloud provider's API to see if the server has been deactivated / deleted / terminated... the controller deletes the Node object'.
+Q064,multi,multi,YES,self-healing.md has 'Kubernetes creates a replacement Pod' but never says the scheduler places it; kube-scheduler.md has placement but not the Deployment controller. Neither alone.
+Q065,multi,single,no,architecture.md alone: the DNS addon section AND the kube-proxy-optional section are both in it.
+Q066,multi,single,no,"Same as Q058, of which it is a near-duplicate. runtime-class.md alone; kube-scheduler.md contributes nothing."
+Q067,multi,single,no,kubectl.md alone: 'it can use in-cluster authentication based on the ServiceAccount token mounted in the Pod' + 'it sends requests to the API server'.
+Q068,multi,single,no,Same as Q059. Either cited doc alone carries finalizers + owner references.
+Q069,multi,single,no,"kube-scheduler.md alone: the filtering step, 'If the list is empty, that Pod isn't (yet) schedulable', and 'remains unscheduled until the scheduler is able to place it'."
+Q070,multi,multi,YES,networking.md has kube-apiserver assigning Service IPs but no kube-proxy; components.md has 'kube-proxy: Maintains network rules on nodes to implement Services' but not IP assignment. Neither alone.
+Q071,multi,single,no,control-plane-node-communication.md alone: HTTPS + client credentials + 'All API usage from nodes... terminates at the API server'.
+Q072,multi,multi,YES,kubectl.md never mentions the Job controller; controller.md never mentions kubectl. Neither alone.
+Q073,multi,single,no,"finalizers.md alone: the pv-protection example AND the 'Owner references, labels, and finalizers' section."
+Q074,multi,single,no,"components.md alone: kube-scheduler 'Looks for Pods not yet bound to a node' + kubelet 'Ensures that Pods are running, including their containers'."
+Q075,multi,single,no,cloud-controller.md lines 57 and 92 alone: the service controller sets up load balancers 'when you declare a Service resource that requires them'.
+Q076,multi,single,no,network-plugins.md alone carries the loopback requirement; the co-cited runtime-class.md contains no mention of loopback or sandbox networking at all.
+Q077,multi,single,no,gang-scheduling.md alone: 'When the GangScheduling plugin is enabled' + 'This feature depends on the PodGroup API'.
+Q078,multi,single,no,gang-scheduling.md alone: 'GangScheduling plugin implements a Permit extension point... to determine whether the minCount constraint is satisfied'.
+Q079,multi,single,no,podgroup-scheduling.md alone: 'evaluates a group of Pods as a single unit... If it cannot find sufficient resources... none of the Pods are bound'. Gold answer separately omits the named approach.
+Q080,multi,single,no,"podgroup-scheduling.md alone: 'if new Pods are added to a PodGroup after others have already been scheduled, the cycle evaluates the new Pods while accounting for the existing ones'."
+Q081,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q082,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q083,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q084,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q085,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q086,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q087,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q088,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q089,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q090,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q091,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q092,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q093,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q094,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q095,unanswerable,unanswerable,n/a,Verified unanswerable: no support anywhere in the 40-doc corpus (grep-checked for the specific fact).
+Q096,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q097,single,single,n/a,Verified: gold answer fully supported by its one cited document.
+Q098,multi,single,no,garbage-collection.md alone: its own 'Owners and dependents' section carries owner references AND the cascading-deletion cleanup.
+Q099,multi,single,no,"garbage-collection.md alone: 'If a finalizer exists, it ensures that objects are not deleted until all necessary clean-up tasks are completed' plus the owner-reference machinery."
+Q100,multi,multi,YES,self-healing.md has controllers + kubelet but not placement; kube-scheduler.md has placement only. The three-part gold answer needs both.

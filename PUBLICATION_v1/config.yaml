@@ -1,0 +1,124 @@
+# ============================================================
+# OKF-RAG experiment configuration
+# Every knob that affects a reported number lives here.
+# Do not hardcode values in src/ -- change them here so the
+# config file can be published alongside the paper.
+# ============================================================
+
+experiment:
+  name: "okf_rag_v1"
+  seed: 42
+
+paths:
+  raw_docs: "data/raw"
+  bundle: "data/okf_bundle"
+  questions: "questions/questions.csv"
+  results: "results"
+
+embedding:
+  # Runs on CPU. ~80MB download on first use.
+  model: "sentence-transformers/all-MiniLM-L6-v2"
+  batch_size: 32
+
+retrieval:
+  # CRITICAL FOR VALIDITY: both arms get the SAME context budget.
+  # If one arm is allowed more context, any win is confounded.
+  context_token_budget: 1800
+
+  chunk: # Arm A -- baseline naive RAG
+    chunk_size_tokens: 512
+    chunk_overlap_tokens: 64
+    top_k: 8
+
+  okf: # Arm B -- proposed OKF-RAG
+    top_k: 5
+    hop_expansion: 1 # 0 disables link expansion (ablation)
+    max_expanded: 4 # cap on neighbours pulled in
+    embed_field: "title_description" # or "full_body"
+
+generation:
+  # LOCAL Ollama, not Groq: Groq's 200k tokens/DAY quota allows only ~27 rows
+  # before a hard wall, which cannot finish a ~600-row Stage G run. Local
+  # inference has no quota. Ollama serves the OpenAI dialect at
+  # /v1/chat/completions -- the existing default chat_path -- so no provider
+  # class is needed, only base_url + a null api_key_env.
+  model: "llama3.1:8b"
+  temperature: 0.0
+  # Unchanged from the Groq setup -- same reasoning-budget rationale applies
+  # regardless of provider. 1200, not 400: a reasoning generator spends part of
+  # the budget on hidden reasoning before emitting the answer.
+  max_tokens: 1200
+  # Raised from 180: bundle extraction on this same local model measured 272s
+  # for a 5.1KB document. Generation's max_tokens is much smaller (1200 vs
+  # 16000), so this is conservative headroom, not a measured number -- a
+  # timeout firing on a healthy generation costs a wasted retry, worse than
+  # waiting.
+  timeout_s: 600
+  # null => local provider, no credential. llm.py skips the Authorization
+  # header entirely rather than sending an empty Bearer token.
+  api_key_env: null
+  base_url: "http://localhost:11434"
+
+judge:
+  # LOCAL Ollama -- same reasoning as generation above. Judging is a SEPARATE
+  # call per row, so it still adds to Groq's daily total even though it is a
+  # smaller model; moving it removes that quota pressure too. Note this DROPS
+  # the different-model-for-judge-vs-generator setup (gpt-oss-120b generating,
+  # gpt-oss-20b judging) that reduces self-preference bias -- both arms now
+  # share one local model for both roles. Flagged, not silently changed.
+  enabled: true
+  model: "llama3.1:8b"
+  temperature: 0.0
+  # Unchanged from the Groq setup -- same reasoning-budget rationale. The label
+  # is one word, but a reasoning judge needs headroom to reach it.
+  max_tokens: 1500
+  timeout_s: 600
+  api_key_env: null
+  base_url: "http://localhost:11434"
+
+bundle_builder:
+  # Concept extraction is LLM-assisted; cross-linking is deterministic.
+  # LOCAL Ollama -- this stage alone. generation.* and judge.* stay on Groq.
+  # Third provider for this stage: Groq exhausted its 200k tokens/DAY, and
+  # gemini-2.5-flash's free tier is only 20 requests (not the 1500/day that
+  # applied to the older 1.5-flash). Local inference has no quota at all.
+  # Ollama serves the OpenAI dialect at /v1/chat/completions -- the existing
+  # default chat_path -- so there is still no provider class, only a base_url.
+  model: "llama3.1:8b"
+  temperature: 0.0
+  # null => local provider, no credential. llm.py skips the Authorization
+  # header entirely rather than sending an empty Bearer token.
+  api_key_env: null
+  base_url: "http://localhost:11434"
+  # Ollama honours `seed` and, being a dense local model with no server-side
+  # batching, actually reproduces output for a fixed seed -- unlike the hosted
+  # MoE models, where llm.py notes seed is best-effort only.
+  send_seed: true
+  # Retries here are NOT for quota: a local server never returns 429. They cover
+  # local faults only -- a dropped connection, or a malformed generation. The
+  # backoff/timeout/checkpoint logic is unchanged and provider independent.
+  retries: 8
+  # Raised from 180: measured 272s for a 5.1KB document on this hardware, so a
+  # 10KB one lands near 600s. 1800 leaves headroom -- a timeout that fires on a
+  # healthy generation costs retries x 30min, far worse than waiting.
+  timeout_s: 1800
+  max_retry_after_s: 120
+  max_concepts_per_doc: 12
+  min_concept_words: 15 # was 40 -- too strict, silently killed almost every concept
+  # Must fit max_concepts_per_doc whole concept objects (now including aliases)
+  # PLUS the model's hidden reasoning. llm.py salvages complete objects from a
+  # truncated response and build_bundle warns, so raise this if you see that
+  # warning -- but note the ceiling below.
+  # 16000, not the Groq-era 5000: that ceiling existed only because Groq allowed
+  # 8000 tokens/MINUTE. At 5000, extraction truncated the three largest
+  # documents and lost one entirely; at 16000 there were zero truncations.
+  # Confirmed good -- do not lower.
+  # NOTE for Ollama: this maps to num_predict (output). The INPUT context is
+  # num_ctx, which Ollama defaults to a small value and which the OpenAI
+  # endpoint does not expose -- see OLLAMA_CONTEXT_LENGTH check below/in report.
+  max_tokens: 16000
+  # How pass 2 decides two concepts are related. Both are pure rule-based string
+  # matching; "alias" additionally matches the surface forms the extractor
+  # recorded, because LLM-written descriptive titles almost never appear
+  # verbatim in a sibling concept's body. Run both and report as an ablation.
+  link_mode: "alias" # "title_only" | "alias"

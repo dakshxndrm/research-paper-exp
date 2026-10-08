@@ -1,0 +1,6 @@
+ablation,link_mode,hallucination,f1,em,retrieval_recall,citation_valid,abstained,context_tokens,n_units,n
+embed_full_body,alias,0.08,0.2823,0.0,0.8118,0.9659,0.18,1198.56,8.89,100
+full,alias,0.05,0.2661,0.02,0.7647,0.9239,0.22,1157.25,8.88,100
+full,title_only,0.11,0.248,0.0,0.7882,0.9835,0.23,730.81,7.96,100
+no_expansion,alias,0.07,0.2574,0.0,0.7353,0.857,0.23,659.17,5.0,100
+two_hop,alias,0.09,0.2758,0.02,0.8,0.9314,0.2,1538.14,11.96,100

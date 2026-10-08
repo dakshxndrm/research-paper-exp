@@ -1,0 +1,9 @@
+# title_only link-mode variant. Everything else comes from config.yaml --
+# state only what differs, so a change to a shared knob cannot skip this run.
+extends: config.yaml
+
+paths:
+  bundle: "data/okf_bundle_title_only"
+
+bundle_builder:
+  link_mode: "title_only"

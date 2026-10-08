@@ -1,0 +1,7 @@
+arm,ablation,link_mode,hop_type,hallucination,f1,em,retrieval_recall,citation_valid,abstained,context_tokens,n_units,n
+chunk,full,alias,multi,0.0,0.3007,0.0,0.5769,1.0,0.0,1539.8462,3.0,13
+chunk,full,alias,single,0.0,0.3846,0.0,0.9487,1.0,0.0256,1630.2564,3.0513,39
+chunk,full,alias,unanswerable,0.25,0.0,0.0,,1.0,1.0,1666.0,3.375,8
+okf,full,alias,multi,0.1538,0.2999,0.0,0.5769,0.9487,0.0,1131.0769,9.0,13
+okf,full,alias,single,0.0769,0.3414,0.0256,0.8718,0.8919,0.0769,1196.5641,8.7436,39
+okf,full,alias,unanswerable,0.0,0.0,0.0,,1.0,0.875,1048.0,9.0,8

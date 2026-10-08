@@ -1,0 +1,12 @@
+\begin{table}[t]
+\caption{Main results (human labels): naive chunk RAG vs OKF-RAG.}
+\label{tab:main-human}
+\begin{tabular}{lllrrrrrrrrr}
+\toprule
+arm & ablation & link\_mode & hallucination & f1 & em & retrieval\_recall & citation\_valid & abstained & context\_tokens & n\_units & n \\
+\midrule
+chunk & full & alias & 0.033 & 0.315 & 0.000 & 0.856 & 1.000 & 0.150 & 1615.433 & 3.083 & 60 \\
+okf & full & alias & 0.083 & 0.287 & 0.017 & 0.798 & 0.914 & 0.167 & 1162.567 & 8.833 & 60 \\
+\bottomrule
+\end{tabular}
+\end{table}
